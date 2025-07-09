@@ -2,9 +2,12 @@
 
 #include <stdio.h>
 
-int second_largest_array( int arr[] , int n );    
-static int largest;    
-static int best_value= 10000;
+int second_largest_array( int arr[] , int n );
+    
+    // Write C code here
+int largest=-1;    
+int second_largest = -1;
+
     
 int second_largest_array( int arr[] , int n){
     int i;
@@ -14,16 +17,16 @@ int second_largest_array( int arr[] , int n){
             }
     }
     for ( i=0; i<n; i++ ){
-        if ( arr[i] < largest && largest != arr[i]){
-            best_value = arr[i];
+        if ( arr[i] > second_largest && largest != arr[i]){
+            second_largest = arr[i];
         }
         
     }
-    if ( best_value == largest ){
-        return -1;
-    }
+    // if ( second_largest == largest ){
+    //     return -1;
+    // }
     
-    return best_value;
+    return second_largest;
 }
 
 int main() {
