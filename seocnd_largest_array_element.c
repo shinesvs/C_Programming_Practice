@@ -1,4 +1,4 @@
-#Second Largest Element in an Array
+// Second Largest Element in an Array
 
 #include <stdio.h>
 
