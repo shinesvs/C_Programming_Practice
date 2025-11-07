@@ -1,0 +1,40 @@
+long long countSubarraysWithSumAndMaxAtMost(int nums_count, const int *nums,
+                                            long long k, int M)
+{
+    int left = 0, right = 0;
+    long long winSum = 0;        // use 64-bit to avoid overflow
+    long long count = 0;
+
+    while (right < nums_count) {
+
+        // Barrier: any value > M splits the array; reset window after it
+        if (nums[right] > M) {
+            right++;
+            left = right;
+            winSum = 0;
+            continue;
+        }
+
+        // Expand window
+        winSum += nums[right];
+
+        // Shrink while sum > k
+        while (left <= right && winSum > k) {
+            winSum -= nums[left++];
+        }
+
+        // If sum == k, count all starts including leading zeros
+        if (winSum == k) {
+            count++;                       // current [left..right]
+            int t = left;
+            while (t < right && nums[t] == 0) {
+                count++;                   // [t+1..right], [t+2..right], ...
+                t++;
+            }
+        }
+
+        right++;
+    }
+
+    return count;
+}
